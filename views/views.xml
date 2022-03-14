@@ -9,10 +9,14 @@
                 <field name ='default_code' position="after">
                     <field name="part_no"/>
                 </field>
-        </field>
-    </record>
 
-         <record id="part_number_in_product_normal_form_view" model="ir.ui.view">
+              <xpath expr="//field[@name='default_code']" position="attributes">
+                <attribute name="string">Part Number[ ]</attribute>
+              </xpath>
+        </field>
+        </record>
+
+    <record id="part_number_in_product_normal_form_view" model="ir.ui.view">
         <field name="name">product.product.inherit</field>
         <field name="model">product.product</field>
         <field name="inherit_id" ref="product.product_normal_form_view"/>
@@ -20,9 +24,13 @@
                 <field name ='default_code' position="after">
                     <field name="part_no"/>
                 </field>
+
+              <xpath expr="//field[@name='default_code']" position="attributes">
+                <attribute name="string">Part Number[ ]</attribute>
+              </xpath>
+
         </field>
     </record>
-
 
     <record id="mbp_sale_order_field_form" model="ir.ui.view">
         <field name="name">sale.order.inherit</field>
@@ -39,6 +47,35 @@
         </field>
     </record>
 
+    <record id="mbp_invoice_field_form" model="ir.ui.view">
+        <field name="name">account.move.inherit</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+                <field name ='partner_id' position="after">
+                    <field name="customer_ref" optional="show"/>
+                    <field name="representative" optional="show"/>
+                    <field name="operator" optional="show"/>
+                    <field name="picked_by" optional="show"/>
+                    <field name="account_no" optional="show"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="mbp_stock_picking_form" model="ir.ui.view">
+        <field name="name">stock.picking.inherit</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+                <field name ='product_id' position="before">
+                    <field name="part_no" optional="show"/>
+            </field>
+        </field>
+    </record>
+
+
+
+
     <record model="ir.ui.view" id="mbp_sale_order_view_inherit">
         <field name="name">sale.order.view.inherit1</field>
         <field name="model">sale.order</field>
@@ -53,7 +90,7 @@
         </field>
     </record>
 
-      <record id="mbp_field_in_account_move_inherit" model="ir.ui.view">
+    <record id="mbp_field_in_account_move_inherit" model="ir.ui.view">
         <field name="name">account.move.inherit</field>
         <field name="model">account.move</field>
         <field name="inherit_id" ref="account.view_move_form"/>

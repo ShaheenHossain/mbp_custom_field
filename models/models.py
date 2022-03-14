@@ -8,6 +8,9 @@ class PartNumberInherit(models.Model):
 
     part_no = fields.Char("Part Number")
 
+
+
+
 class SaleOrder(models.Model):
     _inherit = "sale.order"
 
@@ -15,8 +18,18 @@ class SaleOrder(models.Model):
     representative = fields.Many2one('res.users', string='Rep')
     operator = fields.Many2one('res.users', string='Operator', default=lambda self: self.env.user, tracking=True)
     picked_by = fields.Many2one('res.users', string='Picked By', default=lambda self: self.env.user, tracking=True)
-
     account_no = fields.Char("Account No.")
+
+
+class MbpSaleInvoice(models.Model):
+    _inherit = "account.move"
+
+    customer_ref = fields.Char("Customer Ref")
+    representative = fields.Many2one('res.users', string='Rep')
+    operator = fields.Many2one('res.users', string='Operator', default=lambda self: self.env.user, tracking=True)
+    picked_by = fields.Many2one('res.users', string='Picked By', default=lambda self: self.env.user, tracking=True)
+    account_no = fields.Char("Account No.")
+
 
 
 
@@ -38,3 +51,20 @@ class MbppartAccount(models.Model):
     _inherit = 'account.move.line'
 
     part_no = fields.Char(related="product_id.part_no", string="Part Number")
+
+
+class MbppartStockmove(models.Model):
+    _inherit = 'stock.move'
+
+    part_no = fields.Char(related="product_id.part_no", string="Part Number")
+
+
+class MbppartStockpicking(models.Model):
+    _inherit = 'stock.picking'
+
+    part_no = fields.Char(related="product_id.part_no", string="Part Number")
+
+# class MbppartStockpicking(models.Model):
+#     _inherit = 'stock.piking.line'
+#
+#     part_no = fields.Char(related="product_id.part_no", string="Part Number")

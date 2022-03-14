@@ -2,26 +2,51 @@
 <odoo>
     <data>
         <template id="mbp_part_report_order_document_inherit" inherit_id="sale.report_saleorder_document">
-<!--            <xpath expr='//div[@id="informations"]/div[4]' position='replace'>
-                <div>"kdjfkafdka"</div>
-
-            </xpath>-->
-<!--            <th name="th_priceunit" position="after">
-                <th name="th_priceunit" class="text-right">Goods Price</th>
-            </th>
-            <td name="td_priceunit" position="before">
-                <td name="td_goodsprice"  class="text-right">
-                    <span t-field="line.goods_price"/>
-                </td>
-            </td>-->
-
             <th name="th_description" position="before" >
                   <th name="th_part_no" class="text-left">Part No.</th>
             </th>
             <td name="td_name" position="before">
                 <td name="td_part_no"><span t-field="line.part_no"/></td>
             </td>
+
+            <xpath expr="//div[@name='expiration_date']" position="after">
+                <div class="col-auto mw-100 mb-2" t-if="doc.customer_ref" name="customer_ref">
+                    <strong>Customer Ref</strong>
+                    <p class="m-0" t-field="doc.customer_ref"/>
+                </div>
+                <div class="col-auto mw-100 mb-2" t-if="doc.representative" name="representative">
+                    <strong>Rep.</strong>
+                    <p class="m-0" t-field="doc.representative"/>
+                </div>
+                <div class="col-auto mw-100 mb-2" t-if="doc.operator" name="operator">
+                    <strong>Operator</strong>
+                    <p class="m-0" t-field="doc.operator"/>
+                </div>
+
+                <div class="col-auto mw-100 mb-2" t-if="doc.picked_by" name="picked_by">
+                    <strong>Picked by</strong>
+                    <p class="m-0" t-field="doc.picked_by"/>
+                </div>
+                <div class="col-auto mw-100 mb-2" t-if="doc.account_no" name="account_no">
+                    <strong>Account No</strong>
+                    <p class="m-0" t-field="doc.account_no"/>
+                </div>
+            </xpath>
+
+
+<!--            trying to hide or replace the string-->
+
+<!--            <xpath expr="//div[@name='user_id']/tree/field[@name='user_id']" position="attributes">
+                <attribute name="string">Operator</attribute>
+            </xpath>-->
+
+<!--            <xpath expr="//div[@name='user_id']" position="attributes">
+                <attribute name="t-att-style">'display: none;'</attribute>
+            </xpath>-->
+
         </template>
+
+
 
         <template id="mbp_report_invoice_document_inherit" inherit_id="account.report_invoice_document">
             <th name="th_description" position="before" >
@@ -30,8 +55,35 @@
             <td name="account_invoice_line_name" position="before">
                 <td name="td_part_no"><span t-field="line.part_no"/></td>
             </td>
-        </template>
 
+            <xpath expr="//div[@name='reference']" position="after">
+                <div class="col-auto mw-100 mb-2" t-if="o.customer_ref" name="customer_ref">
+                    <strong>Customer Ref</strong>
+                    <p class="m-0" t-field="o.customer_ref"/>
+                </div>
+                <div class="col-auto mw-100 mb-2" t-if="o.representative" name="representative">
+                    <strong>Rep.</strong>
+                    <p class="m-0" t-field="o.representative"/>
+                </div>
+                <div class="col-auto mw-100 mb-2" t-if="o.operator" name="operator">
+                    <strong>Operator</strong>
+                    <p class="m-0" t-field="o.operator"/>
+                </div>
+
+                <div class="col-auto mw-100 mb-2" t-if="o.picked_by" name="picked_by">
+                    <strong>Picked by</strong>
+                    <p class="m-0" t-field="o.picked_by"/>
+                </div>
+                <div class="col-auto mw-100 mb-2" t-if="o.account_no" name="account_no">
+                    <strong>Account No</strong>
+                    <p class="m-0" t-field="o.account_no"/>
+                </div>
+            </xpath>
+        </template>
 
     </data>
 </odoo>
+
+
+
+
